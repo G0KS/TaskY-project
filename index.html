@@ -22,7 +22,7 @@
     <title>Tasky</title>
   </head>
 
-  <body>
+  <body onload="initialLoadCards()">
     <!-- Modal -->
     <div
       class="modal fade"
@@ -45,11 +45,6 @@
           <div class="modal-body">
             <form>
               <div class="mb-3">
-                <label for="imgurl" class="form-label">Image Url</label>
-                <input
-                  type="url"
-                  class="form-control"
-                  id="imgurl"
                 <label for="imageurl" class="form-label">Image Url</label>
                 <input
                   type="url"
@@ -68,20 +63,12 @@
                   class="form-control"
                   id="taskTitle"
                   aria-describedby="Task Title"
-                  placeholder="eg: Encryption"
                   placeholder="eg: Edit"
                 />
               </div>
             </form>
             <form>
               <div class="mb-3">
-                <label for="imgurl" class="form-label">Task Type</label>
-                <input
-                  type="url"
-                  class="form-control"
-                  id="imgurl"
-                  aria-describedby="Task Type"
-                  placeholder="eg: Work"
                 <label for="taskType" class="form-label">Task Type</label>
                 <input
                   type="text"
@@ -94,14 +81,6 @@
             </form>
             <form>
               <div class="mb-3">
-                <label for="imgurl" class="form-label">Task Description</label>
-                <input
-                  type="url"
-                  class="form-control"
-                  id="imgurl"
-                  aria-describedby="Task Description"
-                  placeholder="eg: To encrypt the given image"
-                />
                 <label for="taskDescription" class="form-label"
                   >Task Description</label
                 >
@@ -116,7 +95,6 @@
             </form>
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-primary">Save changes</button>
             <button
               type="button"
               class="btn btn-primary"
@@ -182,54 +160,6 @@
           </div>
         </div>
       </div>
-      <section>
-        <div class="row">
-          <div class="col-md-6 col-lg-4">
-            <div class="card">
-              <div class="card-header d-flex justify-content-end gap-1">
-                <button type="button" class="btn btn-outline-success">
-                  <i class="fas fa-pencil-alt"></i>
-                </button>
-                <button type="button" class="btn btn-outline-danger">
-                  <i class="fas fa-trash"></i>
-                </button>
-              </div>
-              <div class="card-body">
-                <img
-                  src="https://cdn.pixabay.com/photo/2015/04/19/08/32/marguerite-729510__340.jpg"
-                  class="card-img-top"
-                  alt="Card Image"
-                />
-                <h5 class="card-title"></h5>
-                <p class="card-text"></p>
-                <a href="#" class="bg-primary text-light"></a>
-              </div>
-              <div class="card-footer">
-                <button type="button" class="btn btn-outline-primary">
-                  Open Task
-                </button>
-              </div>
-      <section>
-        <div class="row justify-content-center mt-3">
-          <div class="col-md-6">
-            <div class="input-group mb-3">
-              <input
-                type="text"
-                class="form-control shadow-sm p-2 mb-5 bg-body rounded"
-                placeholder="Search Task"
-                aria-label="Search Task"
-                aria-describedby="basic-addon2"
-              />
-              <span
-                class="input-group-text shadow-sm p-2 mb-5 bg-body rounded"
-                id="basic-addon2"
-              >
-                <i class="fas fa-search"></i
-              ></span>
-            </div>
-          </div>
-        </div>
-      </section>
       <section>
         <div class="row task__container"></div>
       </section>
