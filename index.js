@@ -4,6 +4,7 @@ const openTaskModal = document.querySelector(".displayModal");
 
 let globalStorage = [];
 
+//load  initially saved data
 const initialLoadCards = () => {
   //accessing data from localstorage
   const getCardData = localStorage.getItem("tasky");
@@ -76,6 +77,7 @@ const saveChanges = () => {
   localStorage.setItem("tasky", JSON.stringify({ cards: globalStorage }));
 };
 
+//delete card button
 const deleteCard = (event) => {
   event = window.event;
   const targetId = event.target.id;
@@ -98,6 +100,7 @@ const deleteCard = (event) => {
   }
 };
 
+//edit card button
 const editCard = (event) => {
   event = window.event;
   const targetId = event.target.id;
@@ -120,12 +123,15 @@ const editCard = (event) => {
   taskDescription.setAttribute("contenteditable", "true");
   taskType.setAttribute("contenteditable", "true");
   submitButton.innerHTML = "Save changes";
+  submitButton.removeAttribute("data-bs-toggle");
+  submitButton.removeAttribute("data-bs-target");
   submitButton.setAttribute(
     "onclick",
     "saveEditedChanges.apply(this, arguments)"
   );
 };
 
+//save change after editing
 const saveEditedChanges = (event) => {
   event = window.event;
   const targetId = event.target.id;
@@ -168,10 +174,13 @@ const saveEditedChanges = (event) => {
   taskTitle.setAttribute("contenteditable", "false");
   taskDescription.setAttribute("contenteditable", "false");
   taskType.setAttribute("contenteditable", "false");
-  submitButton.removeAttribute("onclick");
   submitButton.innerHTML = "Open task";
+  submitButton.setAttribute("onclick", "openTask.apply(this, arguments)");
+  submitButton.setAttribute("data-bs-toggle", "modal");
+  submitButton.setAttribute("data-bs-target", "#openTaskModal");
 };
 
+//modal call for display task contents
 const displayTask = (task) => {
   return `
   <div class="modal-header">
@@ -204,6 +213,7 @@ const displayTask = (task) => {
   `;
 };
 
+//display task contents
 const openTask = (event) => {
   event = window.event;
   const targetId = event.target.id;
