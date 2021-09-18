@@ -1,5 +1,7 @@
 const taskContainer = document.querySelector(".task__container");
 
+const openTaskModal = document.querySelector(".displayModal");
+
 let globalStorage = [];
 
 const initialLoadCards = () => {
@@ -42,7 +44,14 @@ const generateNewCard = (taskData) => `
       <a class="bg-primary text-light"> ${taskData.taskType} </a>
     </div>
     <div class="card-footer d-flex justify-content-end">
-      <button type="button" class="btn btn-outline-primary" id=${taskData.id}"> 
+      <button 
+        type="button" 
+        class="btn btn-outline-primary" 
+        id=${taskData.id} 
+        data-bs-toggle="modal" 
+        data-bs-target="#openTaskModal" 
+        onclick="openTask.apply(this, arguments)"
+      > 
         Open Task
       </button>
     </div>
@@ -159,5 +168,49 @@ const saveEditedChanges = (event) => {
   taskTitle.setAttribute("contenteditable", "false");
   taskDescription.setAttribute("contenteditable", "false");
   taskType.setAttribute("contenteditable", "false");
+  submitButton.removeAttribute("onclick");
   submitButton.innerHTML = "Open task";
+};
+
+const displayTask = (task) => {
+  return `
+  <div class="modal-header">
+  <h5 class="modal-title">${task.taskTitle}</h5>
+    <button
+      type="button"
+      class="btn-close"
+      data-bs-dismiss="modal"
+      aria-label="Close"
+    ></button>
+  </div>
+  <div class="modal-body">
+    <img
+      src="${task.imageUrl}"
+      class="card-img-top"
+      alt="Card Image"
+    />
+    <p class="card-text">${task.taskDescription}</p>
+    <a class="bg-primary text-light"> ${task.taskType} </a>
+  </div>
+  <div class="modal-footer">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      data-bs-dismiss="modal"
+    >
+    Close
+    </button>
+  </div>
+  `;
+};
+
+const openTask = (event) => {
+  event = window.event;
+  const targetId = event.target.id;
+
+  const taskData = globalStorage.filter(
+    (cardObject) => cardObject.id === targetId
+  );
+
+  openTaskModal.innerHTML = displayTask(taskData[0]);
 };
